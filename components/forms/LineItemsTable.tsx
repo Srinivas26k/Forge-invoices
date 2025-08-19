@@ -3,6 +3,9 @@ import useInvoiceStore from "@/lib/store";
 import { useState } from "react";
 import ItemModal from "./ItemModal";
 import type { LineItem } from "@/lib/store";
+import { Plus, Package, Calculator } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
 
 export default function LineItemsTable() {
   const items = useInvoiceStore((state) => state.items);
@@ -31,37 +34,44 @@ export default function LineItemsTable() {
   };
 
   return (
-    <div className="notion-style">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 space-y-2 sm:space-y-0">
-        <h2 className="notion-header mb-0">Items</h2>
-        <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
-          <label className="flex items-center text-xs sm:text-sm font-medium text-gray-700">
-            <input
-              type="checkbox"
+    <div>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 space-y-4 sm:space-y-0">
+        <h2 className="modern-header mb-0">
+          <Package className="w-6 h-6" />
+          Invoice Items
+        </h2>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
+          <div className="flex items-center space-x-2">
+            <Switch
               checked={sameGst}
-              onChange={(e) => setSameGst(e.target.checked)}
-              className="h-3 w-3 sm:h-4 sm:w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded mr-2"
+              onCheckedChange={setSameGst}
+              id="same-gst"
             />
-            Apply same GST to all items
-          </label>
+            <label htmlFor="same-gst" className="text-sm font-medium text-gray-700">
+              Apply same GST to all items
+            </label>
+          </div>
           {sameGst && (
-            <select 
-              value={globalGst} 
-              onChange={(e) => setGlobalGst(Number(e.target.value))}
-              className="form-input w-auto text-xs sm:text-sm"
-            >
-              <option value={0}>GST 0%</option>
-              <option value={5}>GST 5%</option>
-              <option value={12}>GST 12%</option>
-              <option value={18}>GST 18%</option>
-              <option value={28}>GST 28%</option>
-            </select>
+            <div className="flex items-center space-x-2">
+              <Calculator className="w-4 h-4 text-gray-500" />
+              <select 
+                value={globalGst} 
+                onChange={(e) => setGlobalGst(Number(e.target.value))}
+                className="modern-input w-auto text-xs sm:text-sm"
+              >
+                <option value={0}>GST 0%</option>
+                <option value={5}>GST 5%</option>
+                <option value={12}>GST 12%</option>
+                <option value={18}>GST 18%</option>
+                <option value={28}>GST 28%</option>
+              </select>
+            </div>
           )}
-          <button onClick={handleAddItem} className="btn btn-primary btn-sm sm:btn-md w-full sm:w-auto">
-            <span className="material-icons mr-1 sm:mr-2 text-xs sm:text-sm">add</span>
+          <Button onClick={handleAddItem} className="modern-btn modern-btn-primary w-full sm:w-auto">
+            <Plus className="w-4 h-4 mr-1 sm:mr-2" />
             <span className="hidden sm:inline">Add Item</span>
             <span className="sm:hidden">Add</span>
-          </button>
+          </Button>
         </div>
       </div>
       

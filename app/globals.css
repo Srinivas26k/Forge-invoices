@@ -2,14 +2,225 @@
 
 :root {
   --font-inter: 'Inter', sans-serif;
+  
+  /* Enhanced color palette */
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+  --primary: 240 5.9% 10%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 240 4.8% 95.9%;
+  --secondary-foreground: 240 5.9% 10%;
+  --muted: 240 4.8% 95.9%;
+  --muted-foreground: 240 3.8% 46.1%;
+  --accent: 240 4.8% 95.9%;
+  --accent-foreground: 240 5.9% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --ring: 240 5.9% 10%;
+  --radius: 0.5rem;
+  
+  /* Custom invoice theme colors */
+  --invoice-primary: 217 91% 60%;
+  --invoice-secondary: 240 4.8% 95.9%;
+  --invoice-success: 142 76% 36%;
+  --invoice-warning: 38 92% 50%;
+  --invoice-danger: 0 84.2% 60.2%;
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 240 5.9% 10%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 240 4.9% 83.9%;
+}
+
+* {
+  border-color: hsl(var(--border));
 }
 
 body {
   font-family: var(--font-inter);
-  background-color: #f8f9fa;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
 }
 
+/* Modern glass-morphism card styles */
+.modern-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    0 4px 16px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modern-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.15),
+    0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 640px) {
+  .modern-card {
+    padding: 28px;
+    margin-bottom: 28px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .modern-card {
+    padding: 32px;
+    margin-bottom: 32px;
+  }
+}
+
+/* Enhanced header styles */
+.modern-header {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: hsl(var(--foreground));
+  background: linear-gradient(135deg, hsl(var(--invoice-primary)), hsl(var(--invoice-primary)) 60%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (min-width: 640px) {
+  .modern-header {
+    font-size: 1.375rem;
+    margin-bottom: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .modern-header {
+    font-size: 1.5rem;
+    margin-bottom: 28px;
+  }
+}
+
+/* Animated form inputs */
+.modern-input {
+  background: hsl(var(--background));
+  border: 2px solid hsl(var(--border));
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: hsl(var(--foreground));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+}
+
+.modern-input:focus {
+  outline: none;
+  border-color: hsl(var(--invoice-primary));
+  box-shadow: 0 0 0 4px hsla(var(--invoice-primary), 0.1);
+  transform: scale(1.01);
+}
+
+.modern-input:hover:not(:focus) {
+  border-color: hsl(var(--muted-foreground));
+}
+
+/* Enhanced buttons */
+.modern-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 12px;
+  font-weight: 600;
+  padding: 12px 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
+  border: 2px solid transparent;
+}
+
+.modern-btn-primary {
+  background: linear-gradient(135deg, hsl(var(--invoice-primary)), hsl(217 91% 50%));
+  color: white;
+  box-shadow: 0 4px 12px hsla(var(--invoice-primary), 0.3);
+}
+
+.modern-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px hsla(var(--invoice-primary), 0.4);
+}
+
+.modern-btn-secondary {
+  background: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+  border-color: hsl(var(--border));
+}
+
+.modern-btn-secondary:hover {
+  background: hsl(var(--accent));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Success states and animations */
+.success-animation {
+  animation: successPulse 2s ease-in-out;
+}
+
+@keyframes successPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Loading states */
+.loading-shimmer {
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0) 0%, 
+    rgba(255, 255, 255, 0.2) 20%, 
+    rgba(255, 255, 255, 0.5) 60%, 
+    rgba(255, 255, 255, 0)
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Legacy styles for backward compatibility */
 .notion-style {
+  /* Use modern-card for new components */
   background-color: #ffffff;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
